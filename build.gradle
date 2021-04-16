@@ -1,0 +1,79 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = 'org.digitalforge'
+version = '1.0.0'
+
+dependencies {
+
+    testImplementation 'junit:junit:4.13.2'
+
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+
+                name = 'SneakyThrow'
+                description = 'Sneakily rethrow checked exceptions.'
+                url = 'https://bitbucket.org/digitalforge/sneakythrow/'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'zreed'
+                        name = 'Zachary Reed'
+                        email = 'zach@digitalforge.org'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://bitbucket.org/digitalforge/sneakythrow.git'
+                    developerConnection = 'scm:git:git@bitbucket.org:digitalforge/sneakythrow.git'
+                    url = 'https://bitbucket.org/digitalforge/sneakythrow/'
+                }
+
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.mavenJava
+}
