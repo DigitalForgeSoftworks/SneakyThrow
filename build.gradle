@@ -62,7 +62,7 @@ publishing {
                     developer {
                         id = 'zreed'
                         name = 'Zachary Reed'
-                        email = 'zach@digitalforge.org'
+                        email = 'zach@digitalforge.co'
                     }
                 }
 
