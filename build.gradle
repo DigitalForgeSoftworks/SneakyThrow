@@ -9,10 +9,7 @@ repositories {
 }
 
 group = 'org.digitalforge'
-version = '1.0.1'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+version = '1.1.0'
 
 dependencies {
 
@@ -23,6 +20,10 @@ dependencies {
 java {
     withJavadocJar()
     withSourcesJar()
+    toolchain {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 javadoc {

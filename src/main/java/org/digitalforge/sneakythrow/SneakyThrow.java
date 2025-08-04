@@ -21,17 +21,20 @@ import java.util.concurrent.ExecutionException;
 
 public class SneakyThrow {
 
+    private static final boolean UNWRAP = Boolean.getBoolean("digitalforge.sneakythrow.unwrap");
+
     @SuppressWarnings("unchecked")
-    public static <T extends Throwable> RuntimeException sneak(Throwable t) throws T {
+    public static <T extends Throwable> RuntimeException sneak(Throwable throwable) throws T {
 
-        while((t instanceof ExecutionException) || (t instanceof CompletionException) || (t instanceof InvocationTargetException)) {
+        Throwable t = throwable;
 
-            if (t.getCause() == null) {
-                break;
+        if(UNWRAP) {
+            while ((t instanceof ExecutionException) || (t instanceof CompletionException) || (t instanceof InvocationTargetException)) {
+                if (t.getCause() == null) {
+                    break;
+                }
+                t = t.getCause();
             }
-
-            t = t.getCause();
-
         }
 
         throw (T)t;
