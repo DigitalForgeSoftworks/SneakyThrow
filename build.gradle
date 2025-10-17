@@ -5,16 +5,21 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
-group = 'org.digitalforge'
+group = 'co.digitalforge'
 version = '1.1.0'
 
 dependencies {
+    testImplementation platform('org.junit:junit-bom:5.13.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
 
-    testImplementation 'junit:junit:4.13.2'
-
+test {
+    useJUnitPlatform()
 }
 
 java {
@@ -49,7 +54,7 @@ publishing {
 
                 name = 'SneakyThrow'
                 description = 'Sneakily rethrow checked exceptions.'
-                url = 'https://bitbucket.org/digitalforge/sneakythrow/'
+                url = 'https://github.com/DigitalForgeSoftworks/SneakyThrow/'
 
                 licenses {
                     license {
@@ -67,9 +72,9 @@ publishing {
                 }
 
                 scm {
-                    connection = 'scm:git:https://bitbucket.org/digitalforge/sneakythrow.git'
-                    developerConnection = 'scm:git:git@bitbucket.org:digitalforge/sneakythrow.git'
-                    url = 'https://bitbucket.org/digitalforge/sneakythrow/'
+                    connection = 'scm:git:https://github.com:DigitalForgeSoftworks/SneakyThrow.git'
+                    developerConnection = 'scm:git:git@github.com:DigitalForgeSoftworks/SneakyThrow.git'
+                    url = 'https://github.com/DigitalForgeSoftworks/SneakyThrow'
                 }
 
             }

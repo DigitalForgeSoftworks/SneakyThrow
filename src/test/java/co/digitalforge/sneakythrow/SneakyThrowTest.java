@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.digitalforge.sneakythrow;
+package co.digitalforge.sneakythrow;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class SneakyThrowTest {
 
     @Test
     public void testSneakCompletionException() {
 
-        Assert.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
 
             RuntimeException expected = new RuntimeException("expected");
             CompletionException ex1 = new CompletionException("ex1", expected);
@@ -41,7 +41,7 @@ public class SneakyThrowTest {
     @Test
     public void testSneakExecutionException() {
 
-        Assert.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
 
             RuntimeException expected = new RuntimeException("expected");
             ExecutionException ex1 = new ExecutionException("ex1", expected);
@@ -55,7 +55,7 @@ public class SneakyThrowTest {
     @Test
     public void testSneakInvocationTargetException() {
 
-        Assert.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
 
             RuntimeException expected = new RuntimeException("expected");
             InvocationTargetException ex1 = new InvocationTargetException(expected, "ex1");
@@ -69,7 +69,7 @@ public class SneakyThrowTest {
     @Test
     public void testSneakNestedExceptions() {
 
-        Assert.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
 
             RuntimeException expected = new RuntimeException("expected");
             InvocationTargetException ex2 = new InvocationTargetException(expected, "ex2");

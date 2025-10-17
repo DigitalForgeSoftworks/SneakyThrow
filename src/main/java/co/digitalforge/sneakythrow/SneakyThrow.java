@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.digitalforge.sneakythrow;
+package co.digitalforge.sneakythrow;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CompletionException;
