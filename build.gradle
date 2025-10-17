@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'signing'
+    id 'org.jreleaser' version '1.20.0'
 }
 
 repositories {
@@ -37,16 +37,19 @@ javadoc {
     }
 }
 
-publishing {
-    repositories {
+jreleaser {
+    deploy {
         maven {
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = sonatypeUsername
-                password = sonatypePassword
+            mavenCentral {
+                portal {
+                    stagingRepository('build/release-repo')
+                }
             }
         }
     }
+}
+
+publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
@@ -79,10 +82,15 @@ publishing {
 
             }
         }
+        relocation(MavenPublication) {
+            pom {
+                groupId = "org.digitalforge"
+                distributionManagement {
+                    relocation {
+                        groupId = "co.digitalforge"
+                    }
+                }
+            }
+        }
     }
-}
-
-signing {
-    useGpgCmd()
-    sign publishing.publications.mavenJava
 }
